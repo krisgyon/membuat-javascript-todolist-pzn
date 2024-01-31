@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>javascript</title>
+  </head>
+  <body>
+    <form id="formTodo">
+      <table>
+        <thead>
+          <tr>
+            <td>
+              <label for="todo">Todo:</label>
+              <input type="text" id="todo" name="todo" />
+            </td>
+          </tr>
+          <td><input type="submit" value="Add" style="cursor: pointer" id="add" /></td>
+        </thead>
+      </table>
+    </form>
+
+    <h1>TodoList</h1>
+
+    <table>
+      <thead>
+        <tr>
+          <td>
+            <label for="filter">Filter:</label>
+            <input type="search" id="filter" name="filter" />
+          </td>
+        </tr>
+      </thead>
+      <tbody id="canvas"></tbody>
+    </table>
+
+    <script>
+      const formTodo = document.getElementById("formTodo");
+      const canvas = document.getElementById("canvas");
+
+      formTodo.addEventListener("submit", function (event) {
+        const todo = document.getElementById("todo");
+        const todoValue = todo.value.trim();
+        const tr = document.createElement("tr");
+        const td = document.createElement("td");
+
+        event.preventDefault();
+
+        // membuat logika melakukan submit mengisi todo dan menampilkan ke canvas
+        function textInCanvas() {
+          td.innerHTML = `<input type="button" value="Done" style="cursor: pointer" class="done" /> ${todoValue}`;
+          tr.appendChild(td);
+          canvas.prepend(tr);
+          todo.value = "";
+        }
+
+        todoValue === "" ? todo.focus() : textInCanvas();
+      });
+
+      // membuat logika untuk melakukan penghapusan di area canvas
+      canvas.addEventListener("click", function (event) {
+        if (event.target.classList.contains("done")) {
+          event.target.parentElement.remove();
+        }
+      });
+
+      // membuat logika untuk melakukan filter apakah yang dicari ada di area canvas
+      const filter = document.getElementById("filter");
+      filter.addEventListener("input", function () {
+        const filterLow = filter.value.toLowerCase();
+
+        Array.from(canvas.children).forEach((tr) => {
+          if (tr.textContent.toLowerCase().includes(filterLow)) {
+            tr.style.display = "table-row";
+          } else {
+            tr.style.display = "none";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
