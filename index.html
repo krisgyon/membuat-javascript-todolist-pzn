@@ -37,6 +37,7 @@
     <script>
       const formTodo = document.getElementById("formTodo");
       const canvas = document.getElementById("canvas");
+      const filter = document.getElementById("filter");
       
       // membuat logika melakukan submit mengisi todo dan menampilkan ke canvas
       formTodo.addEventListener("submit", function (event) {
@@ -65,7 +66,6 @@
       });
 
       // membuat logika untuk melakukan filter apakah yang dicari ada di area canvas
-      const filter = document.getElementById("filter");
       filter.addEventListener("input", function () {
         const filterLow = filter.value.toLowerCase();
 
