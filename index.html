@@ -37,7 +37,8 @@
     <script>
       const formTodo = document.getElementById("formTodo");
       const canvas = document.getElementById("canvas");
-
+      
+      // membuat logika melakukan submit mengisi todo dan menampilkan ke canvas
       formTodo.addEventListener("submit", function (event) {
         const todo = document.getElementById("todo");
         const todoValue = todo.value.trim();
@@ -46,7 +47,6 @@
 
         event.preventDefault();
 
-        // membuat logika melakukan submit mengisi todo dan menampilkan ke canvas
         function textInCanvas() {
           td.innerHTML = `<input type="button" value="Done" style="cursor: pointer" class="done" /> ${todoValue}`;
           tr.appendChild(td);
